@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "365140040804",
+    "project_id": "med-reminder-372eb",
+    "storage_bucket": "med-reminder-372eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365140040804:android:e0173150733c4cc87dd371",
+        "android_client_info": {
+          "package_name": "com.medrem.medicinereminder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "365140040804-1uqpu3knfpjq9st93h8k656euuaam2pv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.medrem.medicinereminder",
+            "certificate_hash": "8dd4488e5f27867eadc8f14ddd4fdd29769c36c2"
+          }
+        },
+        {
+          "client_id": "365140040804-er7dq39mtgrgbrmqpg9de3j9bhs6tovr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMynfvxctML-TbnQwxSz16B2485SX9pRc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "365140040804-er7dq39mtgrgbrmqpg9de3j9bhs6tovr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "365140040804-6fm8grmqghdtnm5n8kt6hb4egu89f3h8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.medrem.medicinereminder"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

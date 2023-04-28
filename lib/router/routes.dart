@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medicinereminder/auth/login.dart';
+import 'package:medicinereminder/home/screen/homepage.dart';
 import 'package:medicinereminder/intropage/intropage.dart';
 import 'package:medicinereminder/spalshscreen/splashscreen.dart';
 
@@ -11,11 +12,11 @@ class Routes {
           builder: (_) => const SplashScreen(),
           settings: settings,
         );
-        // case '/main':
-        // return CustomRoute(
-        //   builder: (_) => HomePage(),
-        //   settings: settings,
-        // );
+        case '/home':
+        return CustomRoute(
+          builder: (_) => const HomePage(),
+          settings: settings,
+        );
       case '/login':
         return CustomRoute(
           builder: (_) => const LogInPage(),

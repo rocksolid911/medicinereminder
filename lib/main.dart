@@ -1,8 +1,28 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medicinereminder/router/routes.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  //TODO for we need to use local storage
+  //only use for web not for mobile
+  if(kIsWeb) {
+    final auth = FirebaseAuth.instanceFor(app: Firebase.app(), persistence: Persistence.NONE);
+    await auth.setPersistence(Persistence.LOCAL);
+  }
+
+
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
