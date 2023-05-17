@@ -16,6 +16,9 @@ class AuthProvider extends ChangeNotifier {
   authGoogle()async{
     _user =await AuthRepository().signInWithGoogle();
     secureStorage.writeSecureData("uid", _user!.uid);
+    var token = await user?.getIdToken();
+     secureStorage.writeSecureData("token", token!);
+     secureStorage.writeSecureData("userName", _user!.displayName!);
     if(_user!=null){
       _isAuth = true;
     }
@@ -24,6 +27,8 @@ class AuthProvider extends ChangeNotifier {
   signOutGoogle()async{
     await AuthRepository().signOutGoogle();
     secureStorage.deleteSecureData("uid");
+    secureStorage.deleteSecureData("token");
+    secureStorage.deleteSecureData("userName");
     _isAuth = false;
     _user = null;
     notifyListeners();

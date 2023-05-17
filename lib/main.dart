@@ -1,14 +1,23 @@
 import 'dart:io';
 
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_alarm_background_trigger/flutter_alarm_background_trigger.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medicinereminder/router/routes.dart';
 
 import 'firebase_options.dart';
-
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notifications', // title
+    importance: Importance.high,
+    playSound: true);
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -20,9 +29,10 @@ void main() async{
     final auth = FirebaseAuth.instanceFor(app: Firebase.app(), persistence: Persistence.NONE);
     await auth.setPersistence(Persistence.LOCAL);
   }
+  FlutterAlarmBackgroundTrigger.initialize();
 
 
-
+  //await AndroidAlarmManager.initialize();
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -36,6 +46,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      navigatorKey: navigatorKey,
       initialRoute: '/',
       onGenerateRoute: Routes.generateRoute,
       debugShowCheckedModeBanner: false,

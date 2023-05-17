@@ -15,15 +15,17 @@ class SplashScreen extends ConsumerStatefulWidget {
 class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
-    final authPro = ref.read(authProvider);
+
     Future.delayed(const Duration(seconds: 3), () {
      _checkUid();
     });
     super.initState();
   }
   _checkUid() async {
+    final homePro = ref.watch(homeProvider);
     final SecureStorage secureStorage = SecureStorage();
     var uid = await secureStorage.readSecureData('uid');
+    homePro.setUserName();
     uid == null
         ?   Navigator.pushReplacementNamed(context, '/welcomeScreen')
         :  Navigator.pushReplacementNamed(context, '/home');
