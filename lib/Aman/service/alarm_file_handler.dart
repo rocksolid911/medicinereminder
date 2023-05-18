@@ -1,5 +1,7 @@
-import 'package:flutter_alarm_app/model/alarm.dart';
-import 'package:flutter_alarm_app/service/file_handler.dart';
+
+
+import '../model/alarm.dart';
+import 'file_handler.dart';
 
 class AlarmFileHandler extends FileHandler<List<Alarm>> {
   static final AlarmFileHandler _instance = AlarmFileHandler._();

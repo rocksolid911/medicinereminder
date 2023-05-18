@@ -1,6 +1,6 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_alarm_app/model/alarm.dart';
+import 'package:medicinereminder/Aman/model/alarm.dart';
 
 class AlarmScheduler {
   static Future<void> scheduleRepeatable(Alarm alarm) async {

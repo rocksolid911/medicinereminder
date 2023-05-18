@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_alarm_app/model/alarm.dart';
-import 'package:flutter_alarm_app/service/alarm_file_handler.dart';
+import 'package:medicinereminder/Aman/model/alarm.dart';
+import 'package:medicinereminder/Aman/service/alarm_file_handler.dart';
 
 class AlarmListProvider extends ChangeNotifier {
   AlarmListProvider(this._alarms);

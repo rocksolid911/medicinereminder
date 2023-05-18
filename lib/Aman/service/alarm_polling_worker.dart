@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_alarm_app/service/alarm_flag_manager.dart';
-import 'package:flutter_alarm_app/provider/alarm_state.dart';
+import 'package:medicinereminder/Aman/provider/alarm_state.dart';
+import 'package:medicinereminder/Aman/service/alarm_flag_manager.dart';
 
 class AlarmPollingWorker {
   static final AlarmPollingWorker _instance = AlarmPollingWorker._();
@@ -13,7 +13,7 @@ class AlarmPollingWorker {
 
   bool _running = false;
 
-  /// 알람 플래그 탐색을 시작한다.
+  /// Start alarm flag search.
   Future<void> createPollingWorker(AlarmState alarmState) async {
     if (_running) return;
 
@@ -30,7 +30,7 @@ class AlarmPollingWorker {
     }
   }
 
-  /// 알람 플래그를 찾은 경우 해당 알람의 Id를 반환하고, 플래그가 없는 경우 `null`을 반환한다.
+  /// If an alarm flag is found, the Id of the alarm is returned. If there is no flag, `null` is returned.
   Future<int?> _poller(int iterations) async {
     int? alarmId;
     int iterator = 0;

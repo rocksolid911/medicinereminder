@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_alarm_app/model/alarm.dart';
-import 'package:flutter_alarm_app/provider/alarm_list_provider.dart';
-import 'package:flutter_alarm_app/provider/alarm_state.dart';
+import 'package:medicinereminder/Aman/model/alarm.dart';
+import 'package:medicinereminder/Aman/provider/alarm_list_provider.dart';
+import 'package:medicinereminder/Aman/provider/alarm_state.dart';
+import 'package:medicinereminder/Aman/service/alarm_polling_worker.dart';
+import 'package:medicinereminder/Aman/view/alarm_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_alarm_app/service/alarm_polling_worker.dart';
-import 'package:flutter_alarm_app/view/alarm_screen.dart';
 
 class AlarmObserver extends StatefulWidget {
   final Widget child;

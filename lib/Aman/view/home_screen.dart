@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_alarm_app/model/alarm.dart';
-import 'package:flutter_alarm_app/provider/alarm_list_provider.dart';
-import 'package:flutter_alarm_app/service/alarm_scheduler.dart';
+import 'package:medicinereminder/Aman/model/alarm.dart';
+import 'package:medicinereminder/Aman/provider/alarm_list_provider.dart';
+import 'package:medicinereminder/Aman/service/alarm_scheduler.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {

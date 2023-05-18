@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_alarm_app/provider/permission_provider.dart';
+import 'package:medicinereminder/Aman/provider/permission_provider.dart';
 import 'package:provider/provider.dart';
 
 class PermissionRequestScreen extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_alarm_app/model/alarm.dart';
-import 'package:flutter_alarm_app/provider/alarm_state.dart';
-import 'package:flutter_alarm_app/service/alarm_scheduler.dart';
+import 'package:medicinereminder/Aman/model/alarm.dart';
+import 'package:medicinereminder/Aman/provider/alarm_state.dart';
+import 'package:medicinereminder/Aman/service/alarm_scheduler.dart';
 import 'package:provider/provider.dart';
 
 class AlarmScreen extends StatefulWidget {
@@ -41,8 +41,8 @@ class _AlarmScreenState extends State<AlarmScreen> with WidgetsBindingObserver {
   void _dismissAlarm() async {
     final alarmState = context.read<AlarmState>();
     final callbackAlarmId = alarmState.callbackAlarmId!;
-    // 알람 콜백 ID는 `AlarmScheduler`에 의해 일(0), 월(1), 화(2), ... , 토요일(6) 만큼 더해져 있다.
-    // 따라서 이를 7로 나눈 몫이 해당 요일을 나타낸다.
+    // The alarm callback ID is added by `AlarmScheduler` for day (0), month (1), Tuesday (2), ..., Saturday (6).
+    // Therefore, the quotient divided by 7 represents the day of the week.
     final firedAlarmWeekday = callbackAlarmId % 7;
     final nextAlarmTime =
         widget.alarm.timeOfDay.toComingDateTimeAt(firedAlarmWeekday);
