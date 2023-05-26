@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medicinereminder/Aman/provider/permission_provider.dart';
+import 'package:medicinereminder/riverpod/riverpod.dart';
 import 'package:provider/provider.dart';
 
-class PermissionRequestScreen extends StatelessWidget {
+class PermissionRequestScreen extends ConsumerWidget {
   const PermissionRequestScreen({
     Key? key,
     required this.child,
@@ -11,27 +13,19 @@ class PermissionRequestScreen extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer<PermissionProvider>(
-      builder: (context, provider, _) {
-        if (provider.isGrantedAll()) {
-          return child;
-        }
-        return Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Please allow the permission to activate the alarm.'),
-                TextButton(
-                  onPressed: provider.requestSystemAlertWindow,
-                  child: const Text('set up'),
-                ),
-              ],
+  Widget build(BuildContext context,WidgetRef ref) {
+    final permissionPro = ref.watch(permissionProvider);
+    return Scaffold(
+      body: permissionPro.isGrantedAll()
+          ? child
+          : Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  permissionPro.requestSystemAlertWindow();
+                },
+                child: const Text('Request Permission'),
+              ),
             ),
-          ),
-        );
-      },
     );
   }
 }

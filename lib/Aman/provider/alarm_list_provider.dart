@@ -3,11 +3,20 @@ import 'package:medicinereminder/Aman/model/alarm.dart';
 import 'package:medicinereminder/Aman/service/alarm_file_handler.dart';
 
 class AlarmListProvider extends ChangeNotifier {
-  AlarmListProvider(this._alarms);
 
+AlarmListProvider() {
+    init();
+    notifyListeners();
+  }
   final AlarmFileHandler _fileHandler = AlarmFileHandler();
 
-  final List<Alarm> _alarms;
+    late List<Alarm> _alarms;
+
+  init() async {
+
+    _alarms = (await AlarmFileHandler().read()) ?? [];
+    notifyListeners();
+  }
 
   int get length => _alarms.length;
 

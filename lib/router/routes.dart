@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:medicinereminder/Aman/view/alarm_observer.dart';
+import 'package:medicinereminder/Aman/view/home_screen.dart';
+import 'package:medicinereminder/Aman/view/permission_request_screen.dart';
 import 'package:medicinereminder/auth/login.dart';
 import 'package:medicinereminder/home/screen/homepage.dart';
 import 'package:medicinereminder/intropage/intropage.dart';
@@ -14,7 +17,7 @@ class Routes {
         );
         case '/home':
         return CustomRoute(
-          builder: (_) => const HomePage(),
+          builder: (_) =>  const PermissionRequestScreen(child: AlarmObserver(child: HomeScreen())),
           settings: settings,
         );
       case '/login':

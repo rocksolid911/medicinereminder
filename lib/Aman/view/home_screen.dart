@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medicinereminder/Aman/model/alarm.dart';
 import 'package:medicinereminder/Aman/provider/alarm_list_provider.dart';
 import 'package:medicinereminder/Aman/service/alarm_scheduler.dart';
+import 'package:medicinereminder/riverpod/riverpod.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   void _createAlarm(
@@ -64,12 +66,13 @@ class HomeScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    final alarmList = ref.watch(alarmProvider);
     return Scaffold(
       appBar: AppBar(title: const Text('Flutter Alarm App')),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _createAlarm(context, context.read<AlarmListProvider>());
+          _createAlarm(context, alarmList);
         },
         child: const Icon(Icons.add),
       ),
@@ -77,8 +80,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: Consumer<AlarmListProvider>(
-                builder: (context, alarmList, child) => ListView.builder(
+              child:  ListView.builder(
                   itemCount: alarmList.length,
                   itemBuilder: (context, index) {
                     final alarm = alarmList[index];
@@ -93,7 +95,7 @@ class HomeScreen extends StatelessWidget {
                     );
                   },
                 ),
-              ),
+
             ),
           ],
         ),

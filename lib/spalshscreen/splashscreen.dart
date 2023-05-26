@@ -32,6 +32,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    final alarmState = ref.watch(alarmStateProvider);
     return Container(
       child: FlutterLogo(),
     );

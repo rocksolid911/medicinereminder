@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medicinereminder/Aman/model/alarm.dart';
 import 'package:medicinereminder/Aman/provider/alarm_list_provider.dart';
 import 'package:medicinereminder/Aman/provider/alarm_state.dart';
 import 'package:medicinereminder/Aman/service/alarm_polling_worker.dart';
 import 'package:medicinereminder/Aman/view/alarm_screen.dart';
+import 'package:medicinereminder/riverpod/riverpod.dart';
 import 'package:provider/provider.dart';
 
-class AlarmObserver extends StatefulWidget {
+class AlarmObserver extends ConsumerStatefulWidget {
   final Widget child;
 
   const AlarmObserver({
@@ -15,10 +17,10 @@ class AlarmObserver extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<AlarmObserver> createState() => _AlarmObserverState();
+  AlarmObserverState createState() => AlarmObserverState();
 }
 
-class _AlarmObserverState extends State<AlarmObserver>
+class AlarmObserverState extends ConsumerState<AlarmObserver>
     with WidgetsBindingObserver {
   @override
   void initState() {
@@ -34,9 +36,10 @@ class _AlarmObserverState extends State<AlarmObserver>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+   // final context = ref.read(alarmStateProvider.notifier);
     switch (state) {
       case AppLifecycleState.resumed:
-        AlarmPollingWorker().createPollingWorker(context.read<AlarmState>());
+        AlarmPollingWorker().createPollingWorker(ref.read(alarmStateProvider.notifier));
         break;
       default:
         break;
@@ -45,23 +48,21 @@ class _AlarmObserverState extends State<AlarmObserver>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AlarmState>(builder: (context, state, child) {
-      Widget? alarmScreen;
-
-      if (state.isFired) {
-        final callbackId = state.callbackAlarmId!;
-        Alarm? alarm = context.read<AlarmListProvider>().getAlarmBy(callbackId);
-        if (alarm != null) {
-          alarmScreen = AlarmScreen(alarm: alarm);
-        }
+    Widget? alarmScreen;
+    final alarmListProvider = ref.watch(alarmProvider);
+    final alarmState = ref.watch(alarmStateProvider);
+    if(alarmState.isFired){
+      final callbackId = alarmState.callbackAlarmId;
+      Alarm? alarm = alarmListProvider.getAlarmBy(callbackId!);
+      if(alarm != null){
+        alarmScreen = AlarmScreen(alarm: alarm);
       }
-      return IndexedStack(
-        index: alarmScreen != null ? 0 : 1,
-        children: [
-          alarmScreen ?? Container(),
-          widget.child,
-        ],
-      );
-    });
+    }
+    return IndexedStack(
+      index: alarmScreen == null ? 0 : 1,
+      children: [
+        widget.child,
+        alarmScreen ?? Container(),
+      ],);
   }
 }

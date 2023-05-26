@@ -3,12 +3,19 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PermissionProvider extends ChangeNotifier {
-  PermissionProvider(this._preferences);
 
+PermissionProvider() {
+    init();
+  }
   @visibleForTesting
   static const String systemAlertWindowGranted = "systemAlertWindowGranted";
 
-  final SharedPreferences _preferences;
+    late SharedPreferences _preferences;
+
+  init() async {
+    _preferences = await SharedPreferences.getInstance();
+    notifyListeners();
+  }
 
   bool isGrantedAll() {
     return _preferences.getBool(systemAlertWindowGranted) ?? false;
