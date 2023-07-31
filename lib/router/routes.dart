@@ -10,7 +10,7 @@ import 'package:medicinereminder/spalshscreen/splashscreen.dart';
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case '/':
+      case '/splashScreen':
         return CustomRoute(
           builder: (_) => const SplashScreen(),
           settings: settings,

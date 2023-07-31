@@ -4,7 +4,7 @@ import 'package:medicinereminder/Aman/provider/permission_provider.dart';
 import 'package:medicinereminder/riverpod/riverpod.dart';
 import 'package:provider/provider.dart';
 
-class PermissionRequestScreen extends ConsumerWidget {
+class PermissionRequestScreen extends ConsumerStatefulWidget {
   const PermissionRequestScreen({
     Key? key,
     required this.child,
@@ -13,11 +13,28 @@ class PermissionRequestScreen extends ConsumerWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+ ConsumerState createState() => PermissionRequestScreenState();
+}
+
+class PermissionRequestScreenState extends ConsumerState<PermissionRequestScreen> {
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 3), () {
+      final permissionPro = ref.read(permissionProvider);
+      permissionPro.requestSystemAlertWindow();
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final permissionPro = ref.watch(permissionProvider);
+
     return Scaffold(
+
       body: permissionPro.isGrantedAll()
-          ? child
+          ? widget.child
           : Center(
               child: ElevatedButton(
                 onPressed: () {

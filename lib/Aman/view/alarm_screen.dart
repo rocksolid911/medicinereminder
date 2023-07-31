@@ -52,6 +52,12 @@ class AlarmScreenState extends ConsumerState<AlarmScreen> with WidgetsBindingObs
     await AlarmScheduler.reschedule(callbackAlarmId, nextAlarmTime);
 
     alarmState.dismiss();
+    print('alarm dismissed');
+    if(context.mounted) {
+      if (Navigator.of(context).canPop() == true) {
+        Navigator.of(context).pop();
+      }
+    }
   }
 
   @override
@@ -67,7 +73,7 @@ class AlarmScreenState extends ConsumerState<AlarmScreen> with WidgetsBindingObs
               style: Theme.of(context).textTheme.headline4,
             ),
             TextButton(
-              onPressed: _dismissAlarm,
+              onPressed:_dismissAlarm,
               child: const Text('alarm off'),
             ),
           ],

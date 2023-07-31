@@ -70,6 +70,9 @@ class MyAppState extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+   // bool isFirst = ref.read(alarmStateProvider.notifier).isFired;
+    bool isFirst = true;
+    String initialRoute = isFirst ?'/home':'/splashScreen';
     final alarmListProvider = ref.watch(alarmProvider);
     final alarmState = ref.watch(alarmStateProvider);
     final permissionprovider = ref.watch(permissionProvider);
@@ -82,7 +85,7 @@ class MyAppState extends ConsumerState<MyApp> {
       ),
       //home: const PermissionRequestScreen(child: AlarmObserver(child: HomeScreen())),
       navigatorKey: navigatorKey,
-      initialRoute: '/',
+      initialRoute: initialRoute,
       onGenerateRoute: Routes.generateRoute,
       debugShowCheckedModeBanner: false,
     );
